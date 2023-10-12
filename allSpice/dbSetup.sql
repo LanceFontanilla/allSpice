@@ -15,17 +15,19 @@ CREATE TABLE
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         title VARCHAR(100) NOT NULL,
         instructions VARCHAR(5000) NOT NULL,
-        coverImg VARCHAR(500) NOT NULL,
+        img VARCHAR(500) NOT NULL,
         category VARCHAR(100) NOT NULL,
         creatorId VARCHAR(255) NOT NULL,
         FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
+DROP TABLE recipes;
+
 INSERT INTO
     recipes(
         title,
         instructions,
-        coverImg,
+        img,
         category,
         creatorId
     )
@@ -41,7 +43,7 @@ INSERT INTO
     recipes(
         title,
         instructions,
-        coverImg,
+        img,
         category,
         creatorId
     )
@@ -57,7 +59,7 @@ INSERT INTO
     recipes(
         title,
         instructions,
-        coverImg,
+        img,
         category,
         creatorId
     )
