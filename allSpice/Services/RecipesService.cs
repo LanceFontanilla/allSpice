@@ -1,5 +1,7 @@
 
 
+using Microsoft.Extensions.Configuration.UserSecrets;
+
 namespace allSpice.Services;
 
 public class RecipesService
@@ -41,14 +43,12 @@ public class RecipesService
     internal Recipe UpdateRecipe(Recipe updateData)
     {
         Recipe original = this.Get(updateData.Id);
-        //if (original.CreatorId != userId) throw new Exception("Unauthorized");
+        if (updateData.CreatorId != original.CreatorId) throw new Exception("Unauthorized");
 
         original.Title = updateData.Title != null ? updateData.Title : original.Title;
         original.Instructions = updateData.Instructions != null ? updateData.Instructions : original.Instructions;
         original.Img = updateData.Img != null ? updateData.Img : original.Img;
         original.Category = updateData.Category != null ? updateData.Category : original.Category;
-        original.CreatorId = updateData.CreatorId != null ? updateData.CreatorId : original.CreatorId;
-        original.Creator = updateData.Creator != null ? updateData.Creator : original.Creator;
 
         Recipe recipe = _repo.UpdateRecipe(original);
         return recipe;

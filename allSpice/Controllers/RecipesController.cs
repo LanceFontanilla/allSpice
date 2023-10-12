@@ -60,16 +60,17 @@ public class RecipesController : ControllerBase
         }
     }
 
-
+    [Authorize]
     [HttpPut("{recipeId}")]
-    public ActionResult<Recipe> UpdateRecipe([FromBody] Recipe updateData, int recipeId)
+    public async Task<ActionResult<Recipe>> UpdateRecipe([FromBody] Recipe updateData, int recipeId)
     {
         try
         {
-            //Account userInfo = await _auth0.GetUserInfoAsync<Account>(HttpContext);
+            Account userInfo = await _auth0.GetUserInfoAsync<Account>(HttpContext);
+            updateData.CreatorId = userInfo.Id;
             updateData.Id = recipeId;
-            Recipe recipe = _recipesService.UpdateRecipe(updateData);
-            return Ok(recipe);
+            Recipe updatedData = _recipesService.UpdateRecipe(updateData);
+            return Ok(updatedData);
         }
         catch (Exception e)
         {

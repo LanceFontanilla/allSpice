@@ -86,13 +86,21 @@ public class RecipesRepository
         instructions = @instructions,
         img = @img,
         category = @category,
-        creatorId = @creatorId,
-        creator = @creator
         WHERE id = @id;
-        SELECT * FROM recipes WHERE id = @id
+
+        SELECT 
+        rec.*,
+        act.* 
+        FROM recipes rec
+        JOIN accounts act ON act.id = rec.creatorId 
+        WHERE rec.id = @id
         ;";
 
-        Recipe recipe = _db.Query<Recipe>(sql, recipeData).FirstOrDefault();
+        Recipe recipe = _db.Query<Recipe, Account, Recipe>(sql, (recipe, account) =>
+        {
+            recipe.Creator = account;
+            return recipe;
+        }, recipeData).FirstOrDefault();
         return recipe;
     }
 }
