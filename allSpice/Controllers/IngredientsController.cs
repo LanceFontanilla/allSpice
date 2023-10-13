@@ -27,8 +27,22 @@ public class IngredientsController : ControllerBase
         {
             Account userInfo = await _auth0.GetUserInfoAsync<Account>(HttpContext);
 
-            Ingredient newIngredient = _ingredientsService.CreateIngredient(ingredientData);
+            Ingredient newIngredient = _ingredientsService.CreateIngredient(ingredientData, userInfo);
             return newIngredient;
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+    [Authorize]
+    [HttpDelete("{ingredientId}")]
+    public ActionResult<string> DeleteIngredient(int ingredientId)
+    {
+        try
+        {
+            _ingredientsService.DeleteIngredient(ingredientId);
+            return "This ingredient has been deleted";
         }
         catch (Exception e)
         {

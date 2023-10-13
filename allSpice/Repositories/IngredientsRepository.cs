@@ -21,9 +21,32 @@ public class IngredientsRepository
         VALUES
         (@name, @quantity, @recipeId);
 
-        SELECT LAST_INSERT_ID()
+        SELECT *
+        FROM ingredients
+        WHERE id = LAST_INSERT_ID()
         ;";
-
+        Ingredient ingredient = _db.Query<Ingredient>(sql, ingredientData).FirstOrDefault();
         return ingredientData;
+    }
+
+    internal void DeleteIngredient(int ingredientId)
+    {
+        string sql = @"
+        DELETE FROM ingredients
+        WHERE id = @ingredientId
+        LIMIT 1
+        ;";
+        _db.Execute(sql, new { ingredientId });
+    }
+
+    internal List<Ingredient> GetIngredientsByRecipe(int recipeId)
+    {
+        string sql = @"
+        SELECT *
+        FROM ingredients
+        WHERE recipeId = @recipeId;";
+
+        List<Ingredient> ingredients = _db.Query<Ingredient>(sql, new { recipeId }).ToList();
+        return ingredients;
     }
 }

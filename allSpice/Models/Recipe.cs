@@ -12,9 +12,3 @@ public class Recipe
 
 }
 
-public class FavoriteRecipeViewModel : Recipe
-{
-    public string FavoriteId { get; set; }
-    public int RecipeId { get; set; }
-
-}
