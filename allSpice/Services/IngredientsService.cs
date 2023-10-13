@@ -2,6 +2,7 @@
 
 
 
+
 namespace allSpice.Services;
 
 public class IngredientsService
@@ -11,5 +12,11 @@ public class IngredientsService
     public IngredientsService(IngredientsRepository repo)
     {
         _repo = repo;
+    }
+
+    internal Ingredient CreateIngredient(Ingredient ingredientData)
+    {
+        Ingredient newIngredient = _repo.CreateIngredient(ingredientData);
+        return newIngredient;
     }
 }

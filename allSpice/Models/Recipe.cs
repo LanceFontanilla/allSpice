@@ -9,4 +9,12 @@ public class Recipe
     public string Category { get; set; }
     public string CreatorId { get; set; }
     public Account Creator { get; set; }
+
+}
+
+public class FavoriteRecipeViewModel : Recipe
+{
+    public string FavoriteId { get; set; }
+    public int RecipeId { get; set; }
+
 }
