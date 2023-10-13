@@ -6,7 +6,7 @@
     <router-view />
   </main>
    <footer class="bg-dark text-light">
-    Made with 💖 by CodeWorks
+
   </footer>
 </template>
 
@@ -31,6 +31,9 @@ export default {
   --main-height: calc(100vh - 32px - 64px);
 }
 
+main{
+  background-color: rgba(42, 45, 58, 1);
+}
 
 footer {
   display: grid;
