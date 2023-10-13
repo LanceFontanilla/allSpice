@@ -26,7 +26,7 @@ public class IngredientsRepository
         WHERE id = LAST_INSERT_ID()
         ;";
         Ingredient ingredient = _db.Query<Ingredient>(sql, ingredientData).FirstOrDefault();
-        return ingredientData;
+        return ingredient;
     }
 
     internal void DeleteIngredient(int ingredientId)
