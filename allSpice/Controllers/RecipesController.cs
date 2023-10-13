@@ -69,8 +69,8 @@ public class RecipesController : ControllerBase
             Account userInfo = await _auth0.GetUserInfoAsync<Account>(HttpContext);
             updateData.CreatorId = userInfo.Id;
             updateData.Id = recipeId;
-            Recipe updatedData = _recipesService.UpdateRecipe(updateData);
-            return Ok(updatedData);
+            Recipe updatedRecipe = _recipesService.UpdateRecipe(updateData);
+            return Ok(updatedRecipe);
         }
         catch (Exception e)
         {

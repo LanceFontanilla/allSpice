@@ -85,7 +85,7 @@ public class RecipesRepository
         title = @title,
         instructions = @instructions,
         img = @img,
-        category = @category,
+        category = @category
         WHERE id = @id;
 
         SELECT 

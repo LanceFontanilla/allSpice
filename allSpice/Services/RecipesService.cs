@@ -43,7 +43,7 @@ public class RecipesService
     internal Recipe UpdateRecipe(Recipe updateData)
     {
         Recipe original = this.Get(updateData.Id);
-        if (updateData.CreatorId != original.CreatorId) throw new Exception("Unauthorized");
+        if (original.CreatorId != updateData.CreatorId) throw new Exception("Unauthorized");
 
         original.Title = updateData.Title != null ? updateData.Title : original.Title;
         original.Instructions = updateData.Instructions != null ? updateData.Instructions : original.Instructions;
