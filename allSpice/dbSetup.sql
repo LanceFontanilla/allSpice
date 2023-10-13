@@ -43,7 +43,7 @@ CREATE TABLE
         FOREIGN KEY (recipeId) REFERENCES recipes(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
-DROP TABLE recipes;
+DROP TABLE favorites;
 
 INSERT INTO
     recipes(

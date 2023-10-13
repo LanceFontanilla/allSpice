@@ -27,15 +27,6 @@ public class FavoritesRepository
         return favorData;
     }
 
-    internal void DeleteFavorite(int favorId)
-    {
-        string sql = @"
-        DELETE FROM favorites
-        WHERE id = @favorId
-        LIMIT 1
-        ;";
-        _db.Execute(sql, new { favorId });
-    }
 
     internal Favorite GetById(int favorId)
     {
@@ -66,5 +57,14 @@ public class FavoritesRepository
             return recipe;
         }, new { accountId }).ToList();
         return myRecipes;
+    }
+    internal void DeleteFavorite(int favoriteId)
+    {
+        string sql = @"
+        DELETE FROM favorites
+        WHERE id = @favoriteId
+        LIMIT 1
+        ;";
+        _db.Execute(sql, new { favoriteId });
     }
 }

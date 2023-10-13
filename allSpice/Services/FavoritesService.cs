@@ -19,10 +19,9 @@ public class FavoritesService
         return newFavor;
     }
 
-    internal string DeleteFavorite(int favorId)
+    internal void DeleteFavorite(int favoriteId)
     {
-        _repo.DeleteFavorite(favorId);
-        return $"This Favorite has been removed.";
+        _repo.DeleteFavorite(favoriteId);
     }
 
     internal List<FavoriteRecipeViewModel> GetRecipesByAccount(string accountId)
