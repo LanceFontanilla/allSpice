@@ -1,22 +1,24 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-black px-3 d-flex justify-content-between px-3 pt-1">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
+      <div class="d-flex flex-column justify-content-center align-items-center">
         <span>
-          <img alt="logo" src="../assets/img/A.png" height="45" />LL Spice
+          <img alt="logo" src="../assets/img/A.png" height="50" />LL Spice
         </span>
       </div>
     </router-link>
-    
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
 
-      </ul>
-      <!-- LOGIN COMPONENT HERE -->
+      <ModalWrapper id="create-recipe" v-if="user.isAuthenticated">
+        <template #button>
+          <i class="mdi mdi-plus-box"></i> Create Recipe
+        </template>
+
+        <template #body>
+          <RecipeForm/>
+        </template>
+      </ModalWrapper>
+
+      <div class="text-end">
       <Login />
     </div>
   </nav>
@@ -24,11 +26,18 @@
 
 <script>
 import Login from './Login.vue';
+import ModalWrapper from '../components/ModalWrapper.vue'
+import { AppState } from '../AppState';
+import { computed } from 'vue';
+
 export default {
   setup() {
-    return {}
+    return {
+      user: computed(() => AppState.user)
+    
+    }
   },
-  components: { Login }
+  components: { Login, ModalWrapper }
 }
 </script>
 
