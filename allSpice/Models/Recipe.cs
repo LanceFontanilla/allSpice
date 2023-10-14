@@ -1,5 +1,16 @@
 namespace allSpice.Models;
 
+
+// public enum RecipeCategory
+// {
+//     Appetizer,
+//     MainCourse,
+//     Dessert,
+//     SideDish,
+//     Drink,
+//     Other,
+// }
+
 public class Recipe
 {
     public int Id { get; set; }

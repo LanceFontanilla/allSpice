@@ -1,16 +1,15 @@
 <template>
-    <section class="">
-        <div>
-            <p>Garlic Bread</p>
+    <section class="container">
+        <div class="row">
+            <div class="col-4">
+                <h1>Garlic Bread</h1>
+
+            </div>            
+            <div class="col-8 d-flex align-items-center">
+                <span class="category">Side Dish</span>
+            </div>
         </div>
-        <div>
-            <p>Side Dish</p>
-        </div>
-        <div>
-            <p>
-                Ingredient
-            </p>
-        </div>
+
         <div>
             <p>
                 Ingredient
@@ -43,5 +42,11 @@ export default {
 
 
 <style lang="scss" scoped>
+
+.category{
+    background-color: rgba(68, 62, 62, 0.887);
+    color: whitesmoke;
+    border-radius: 5px;
+}
 
 </style>

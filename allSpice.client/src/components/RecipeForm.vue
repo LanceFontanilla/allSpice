@@ -5,47 +5,34 @@
         <form class="row" @submit.prevent="createRecipe">
 
             <div class="mb-1 col-6">
-                <label for="event-name">Name</label>
-                <input v-model="eventData.name" id="event-name" class="form-control" type="text" minlength="5"
-                    maxlength="50" placeholder="name of event" required>
+                <label for="recipe-title">Title</label>
+                <input v-model="recipeData.title" id="recipe-title" class="form-control" type="text" minlength="5"
+                    maxlength="50" placeholder="title of recipe" required>
             </div>
             <div class="mb-1 col-6">
-                <label for="event-type">Type</label>
-                <select v-model="eventData.type" class="form-control" id="event-type" required>
-                    <option disabled selected value="">please select a type</option>
-                    <option value="concert">concerts</option>
-                    <option value="convention">conventions</option>
-                    <option value="sport">sports</option>
-                    <option value="digital">digital</option>
+                <label for="recipe-category">Category</label>
+                <select v-model="recipeData.category" class="form-control" id="recipe-category" required>
+                    <option disabled selected value="">Please Select a Category</option>
+                    <option value="Appetizer">Appetizer</option>
+                    <option value="MainCourse">Main Course</option>
+                    <option value="Dessert">Dessert</option>
+                    <option value="SideDish">SideDish</option>
+                    <option value="Drink">Drink</option>
+                    <option value="Other">Other</option>
                 </select>
             </div>
-            <div class="mb-1 col-6">
-                <label for="event-location">Location</label>
-                <input v-model="eventData.location" id="event-location" class="form-control" type="text" minlength="5"
-                    maxlength="500" placeholder="location of event" required>
-            </div>
-            <div class="mb-1 col-6">
-                <label for="event-capacity">Capacity</label>
-                <input v-model="eventData.capacity" id="event-capacity" class="form-control" type="number" min="1"
-                    max="5000" placeholder="capacity of event" required>
-            </div>
-            <div class="mb-1 col-6">
-                <label for="event-startDate">Date</label>
-                <input v-model="eventData.startDate" id="event-startDate" class="form-control" type="date"
-                    placeholder="date of event" required>
-            </div>
             <div class="form-group">
-                <label for="Description">Description</label>
-                <textarea v-model="eventData.description" type="text" class="form-control" placeholder="description"
+                <label for="Instructions">Instructions</label>
+                <textarea v-model="recipeData.Instructions" type="text" class="form-control" placeholder="Recipe Instructions"
                     maxlength="1000"> </textarea>
             </div>
             <div class="mb-1 col-12">
-                <label for="event-cover">Cover Image</label>
-                <input v-model="eventData.coverImg" id="event-cover" class="form-control" type="url" minlength="5"
-                    maxlength="500" placeholder="url of cover image" required>
+                <label for="recipe-img">Recipe Image</label>
+                <input v-model="recipeData.img" id="recipe-img" class="form-control" type="url" minlength="5"
+                    maxlength="500" placeholder="url of recipe image" required>
             </div>
             <div class="mb-1 col-12">
-                <img class="img-fluid preview-image" :src="eventData.coverImg" alt="">
+                <img class="img-fluid preview-image" :src="recipeData.img" alt="">
             </div>
             <div class="col-12 text-end">
                 <button class="btn btn-secondary">Submit</button>
@@ -64,23 +51,23 @@ import { recipesService } from '../services/RecipesService';
 
 export default {
     setup() {
-        const eventData = ref({})
+        const recipeData = ref({})
         const router = useRouter()
         function resetForm() {
-            eventData.value = { type: '' }
+            recipeData.value = { type: '' }
         }
         onMounted(() => {
             resetForm()
         })
         return {
-            eventData,
-            async createEvent() {
+            recipeData,
+            async createRecipe() {
                 try {
-                    let newRecipe = await recipesService.createRecipe(eventData.value)
-                    Pop.toast('Event Created', 'success', 'center')
+                    let newRecipe = await recipesService.createRecipe(recipeData.value)
+                    Pop.toast('Recipe Created', 'success', 'center')
                     resetForm()
-                    Modal.getOrCreateInstance('#create-event').hide()
-                    router.push({ name: 'Event Details', params: { eventId: newEvent.id } })
+                    Modal.getOrCreateInstance('#create-recipe').hide()
+                    // router.push({ name: 'Recipe Details', params: { recipeId: newRecipe.id } })
                 } catch (error) {
                     Pop.error(error)
                 }
