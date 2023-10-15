@@ -1,17 +1,79 @@
 <template>
 <div>
 
-        <div class="cover-img card bg-purple-light ">
-            <div class="card-header ">
+        <div class="ing-card card bg-secondary text-light ">
+            <div class="card-header bg-dark text-center">
+                <span class="header ">Ingredients</span>
+            </div>                 
+            <div class="card-body row">
+                <div class="col-1">
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 1000 </p>
+                </div>
+                <div class="col-11">
+                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
+                </div>
+                <div class="col-1">
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
+                </div>
+                <div class="col-11">
+                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
+                </div>
+                <div class="col-1">
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
+                </div>
+                <div class="col-11">
+                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
+                </div>
+                <div class="col-1">
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
+                </div>
+                <div class="col-11">
+                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
+                </div>
+                <div class="col-1">
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
+                </div>
+                <div class="col-11">
+                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
+                </div>
+                <div class="col-1">
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
+                </div>
+                <div class="col-11">
+                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
+                </div>
+                <div class="col-1">
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
+                </div>
+                <div class="col-11">
+                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
+                </div>
+                <div class="col-1">
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
+                </div>
+                <div class="col-11">
+                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
+                </div>
+                <div class="col-1">
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
+                </div>
+                <div class="col-11">
+                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
+                </div>
+                <div class="col-1">
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
+                </div>
+                <div class="col-11">
+                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
+                </div>
 
-            </div>
-            <div class="p-0 m-2 mt-2">
-                <p class="fw-bold ">{{ ingredient.name }}</p>
-            </div>
-            <div class="">
-                <p class="p-0 m-2 ">{{ ingredient.quantity }}</p>
-            </div>
-            
+
+            </div>  
+            <div class="card-footer bg-dark">
+                <p class="p-1 m-0 d-flex align-items-center ">
+                    Add Ingredient +
+                </p>
+            </div> 
         </div>
     
 
@@ -39,4 +101,22 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.bg-light-grey{
+    background-color: rgba(125, 121, 121, 0.8) ;
+}
+
+.ing-card{
+    height: 60vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+.ing-card::-webkit-scrollbar {
+    display: none;
+}
+
+.header{
+    font-size: 1.5rem;
+}
+</style>
