@@ -3,21 +3,20 @@
 <template>
     <div class="container-fluid">
         <form class="row" @submit.prevent="createIngredient">
-            <div class="mb-1 col-6">
+            <div class="mb-1 col-5">
                 <label for="ingredient-quantity">Quantity</label>
                 <input v-model="ingredientData.quantity" id="ingredient-quantity" class="form-control" type="text" minlength="1"
                     maxlength="10" placeholder="quantity" required>
             </div>
 
-            <div class="mb-1 col-6">
-                <label for="ingredient-name">Ingredient Name</label>
+            <div class="mb-1 col-5">
+                <label for="ingredient-name">Ingredient</label>
                 <input v-model="ingredientData.name" id="ingredient-name" class="form-control" type="text" minlength="1"
                     maxlength="50" placeholder="Ingredient" required>
             </div>
 
-
-            <div class="col-12 text-end">
-                <button class="btn btn-secondary">Submit</button>
+            <div class="col-1 d-flex align-items-end mb-1 text-end">
+                <button class="btn btn-secondary">+</button>
             </div>
         </form>
     </div>

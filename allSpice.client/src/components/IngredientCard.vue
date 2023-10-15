@@ -7,61 +7,18 @@
             </div>                 
             <div class="card-body row">
                 <div class="col-1">
-                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 1000 </p>
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> {{ ingredient.quantity }} </p>
                 </div>
                 <div class="col-11">
-                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
-                </div>
-                <div class="col-1">
-                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
-                </div>
-                <div class="col-11">
-                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
-                </div>
-                <div class="col-1">
-                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
-                </div>
-                <div class="col-11">
-                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
-                </div>
-                <div class="col-1">
-                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
-                </div>
-                <div class="col-11">
-                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
-                </div>
-                <div class="col-1">
-                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
-                </div>
-                <div class="col-11">
-                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
-                </div>
-                <div class="col-1">
-                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
-                </div>
-                <div class="col-11">
-                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
-                </div>
-                <div class="col-1">
-                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
-                </div>
-                <div class="col-11">
-                    <p class="p-1 m-0 d-flex align-items-center "> Bacon strips, chopped  </p>
-                </div>
-                <div class="col-1">
-                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> 4 </p>
-                </div>
+                    <p class="p-1 m-0 d-flex align-items-center "> {{ ingredient.name }}  </p>
 
-
-
-
-
-            </div>  
+            </div>
+        </div>  
     <!-- <ModalWrapper id="add-ingredient">
         <template #button>  -->
             <div class="card-footer bg-dark">
                 <p class="p-0 m-0 d-flex align-items-center ">
-              <IngredientForm/>          
+                <IngredientForm/>          
                 </p>
             </div> 
         <!-- </template>
@@ -84,7 +41,7 @@
 import { AppState } from '../AppState';
 import { computed, reactive, onMounted } from 'vue';
 import { Ingredient } from '../models/Ingredient';
-import ModalWrapper from '../components/ModalWrapper.vue'
+
 export default {
     props: { ingredient: { type: Ingredient, required: true } },
     setup() {
@@ -92,7 +49,7 @@ export default {
 
         }
     },
-    components: { ModalWrapper }
+
 };
 </script>
 

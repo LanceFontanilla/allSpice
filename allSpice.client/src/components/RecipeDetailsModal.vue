@@ -28,8 +28,8 @@
                         </div>
                     </div>
                     
-                    <div class="col-6">
-                        <IngredientCard/>
+                    <div v-for="i in ingredients" :key="i.id" class="col-6">
+                        <IngredientCard :ingredient="i"/>
                     </div>
             </div>
             </div>
@@ -41,13 +41,33 @@
 <script>
 import { AppState } from '../AppState';
 import { computed, reactive, onMounted } from 'vue';
+import Pop from '../utils/Pop';
+import { recipesService } from '../services/RecipesService';
+import { useRoute } from 'vue-router';
+import { logger } from '../utils/Logger';
+import IngredientCard from '../components/IngredientCard.vue'
 export default {
     setup(){
+        const route = useRoute()
+        onMounted(()=> {
+            getIngredientsByRecipe();
+        });
+        async function getIngredientsByRecipe(){
+            try {
+                const recipeId = route.params.recipeId
+                await recipesService.getIngredientsByRecipe(recipeId);
+                logger.log('getting ingredients by recipeId', recipeId)
+            } catch (error) {
+                Pop.error(error)
+            }
+        }
 
-    return {  
-        activeRecipe: computed(() => AppState.activeRecipe)
-    }
-    }
+
+        return {  
+            activeRecipe: computed(() => AppState.activeRecipe)
+        }
+    },
+    components: { IngredientCard }
 };
 </script>
 
