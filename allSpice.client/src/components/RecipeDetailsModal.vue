@@ -1,17 +1,17 @@
 <template>
-    <section class="container">
+    <section v-if="activeRecipe" class="container">
         <div class="row">
             <div class="col-4">
-                <img class="img-fluid rec-img" src="https://images.unsplash.com/photo-1619531040576-f9416740661b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y2hlZXNlJTIwYnJlYWR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=400&q=60" alt="">
+                <img class="img-fluid rec-img" :src="activeRecipe.img" alt="">
             </div>
             
             <div class="col-8">
                 <div class="row">
                     <div class="col-6 d-flex align-items-center p-4 pt-0">
-                        <span class="title">Garlic Bread</span>
+                        <span class="title">{{ activeRecipe.title }}</span>
                     </div>            
                     <div class="col-6 d-flex align-items-center justify-content-end p-4 pt-0">
-                        <span class="category px-3">Side Dish</span>
+                        <span class="category px-3">{{ activeRecipe.category }}</span>
                     </div>
                 </div>
                 <div class="row">
@@ -20,11 +20,10 @@
                         <div class="direct-card card">
                             <div class="card-header bg-dark text-center">
                                 <span class="header ">
-                                    Directions
+                                    Instructions
                                 </span>
                             </div>
-                        <p class="card-body bg-secondary text-light mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium rem magnam voluptatum, est magni ea ut iusto, nulla atque nostrum cumque? Saepe sunt, fugiat vel sed iure deserunt consectetur nostrum.
-                        </p>
+                        <p class="card-body bg-secondary text-light mb-0">{{ activeRecipe.instructions }}</p>
                         </div>
                     </div>
                     
@@ -40,23 +39,25 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, reactive, onMounted } from 'vue';
+import { computed, reactive, onMounted, watchEffect } from 'vue';
 import Pop from '../utils/Pop';
 import { recipesService } from '../services/RecipesService';
-import { useRoute } from 'vue-router';
+
 import { logger } from '../utils/Logger';
 import IngredientCard from '../components/IngredientCard.vue'
 export default {
     setup(){
-        const route = useRoute()
-        onMounted(()=> {
-            getIngredientsByRecipe();
+        const activeRecipe = computed(()=> AppState.activeRecipe)
+
+        watchEffect(()=> {
+            AppState.activeRecipe
+            getIngredientsByRecipe()
         });
         async function getIngredientsByRecipe(){
             try {
-                const recipeId = route.params.recipeId
-                await recipesService.getIngredientsByRecipe(recipeId);
-                logger.log('getting ingredients by recipeId', recipeId)
+                
+                await recipesService.getIngredientsByRecipe(activeRecipe.value.id);
+                logger.log('getting ingredients by recipeId', AppState.activeRecipe)
             } catch (error) {
                 Pop.error(error)
             }
@@ -64,7 +65,8 @@ export default {
 
 
         return {  
-            activeRecipe: computed(() => AppState.activeRecipe)
+            activeRecipe,
+            ingredients: computed(() => AppState.ingredients),
         }
     },
     components: { IngredientCard }

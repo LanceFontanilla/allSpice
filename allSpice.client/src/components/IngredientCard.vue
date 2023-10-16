@@ -14,19 +14,13 @@
 
             </div>
         </div>  
-    <!-- <ModalWrapper id="add-ingredient">
-        <template #button>  -->
+
             <div class="card-footer bg-dark">
                 <p class="p-0 m-0 d-flex align-items-center ">
                 <IngredientForm/>          
                 </p>
             </div> 
-        <!-- </template>
-        
-        <template #body> -->
 
-        <!-- </template>
-    </ModalWrapper> -->
         </div>
     
 
@@ -46,7 +40,7 @@ export default {
     props: { ingredient: { type: Ingredient, required: true } },
     setup() {
         return {
-
+            
         }
     },
 
