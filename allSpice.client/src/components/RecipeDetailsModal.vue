@@ -51,9 +51,10 @@ import { logger } from '../utils/Logger';
 export default {
     setup(){
         const activeRecipe = computed(()=> AppState.activeRecipe)
-        const activeRecipeIngredients = computed(() => AppState.activeRecipeIngredients)
+        
         watchEffect(()=> {
             AppState.activeRecipe
+           
             getIngredientsByRecipe()
         });
         async function getIngredientsByRecipe(){
@@ -70,7 +71,7 @@ export default {
         return {  
             activeRecipe,
             activeRecipeIngredients: computed(() => AppState.activeRecipeIngredients),
-            ingredients: computed(() => AppState.ingredients),
+            
         }
     },
 

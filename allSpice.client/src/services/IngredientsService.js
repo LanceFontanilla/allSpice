@@ -11,7 +11,7 @@ class IngredientsService{
         const res = await api.post('api/ingredients', ingredientData)
         logger.log('created ingredient', res.data)
         const newIngredient = new Ingredient(res.data)
-        return newIngredient
+        AppState.activeRecipeIngredients.push(newIngredient)
     }
 
 
