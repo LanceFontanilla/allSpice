@@ -1,16 +1,17 @@
 <template>
 <div>
 
-        <div class="ing-card card bg-secondary text-light ">
+        <div v-if="activeRecipe" class="ing-card card bg-secondary text-light ">
             <div class="card-header bg-dark text-center">
                 <span class="header ">Ingredients</span>
             </div>                 
             <div class="card-body row">
-                <div class="col-1">
-                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> {{ ingredient.quantity }} </p>
+                <div class="col-6">
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> {{ activeRecipeIngredient.quantity }} </p>
                 </div>
-                <div class="col-11">
-                    <p class="p-1 m-0 d-flex align-items-center "> {{ ingredient.name }}  </p>
+                <div class="col-6">
+                    <p class="p-1 m-0 d-flex align-items-center "> {{ activeRecipeIngredient.name }}  </p>
+                    
 
             </div>
         </div>  
@@ -37,9 +38,11 @@ import { computed, reactive, onMounted } from 'vue';
 import { Ingredient } from '../models/Ingredient';
 
 export default {
-    props: { ingredient: { type: Ingredient, required: true } },
+    props: {activeRecipeIngredient: {type: Ingredient, required: true}},
     setup() {
         return {
+            activeRecipe: computed(() => AppState.activeRecipe),
+            
             
         }
     },

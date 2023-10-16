@@ -23,8 +23,9 @@ class RecipesService{
 
     async getIngredientsByRecipe(recipeId) {
         const res = await api.get(`api/recipes/${recipeId}/ingredients`)
-        logger.log('getting ingredients', res.data)
+        logger.log('getting ingredients', recipeId)
         AppState.activeRecipeIngredients = res.data.map(ingredient => new Ingredient(ingredient))
+        logger.log('this is the Ingredient', res.data)
     }
 
 }

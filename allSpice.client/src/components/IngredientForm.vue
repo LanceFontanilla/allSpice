@@ -16,7 +16,7 @@
             </div>
 
             <div class="col-1 d-flex align-items-end mb-1 text-end">
-                <button class="btn btn-secondary">+</button>
+                <button type="submit" class="btn btn-secondary">+</button>
             </div>
         </form>
     </div>

@@ -20,6 +20,7 @@
     <section class="row g-4 mt-3">
 
       <div v-for="r in recipes" :key="r.id" class="col-6 col-md-3">
+
         <RecipeCard :recipe="r"/>
       </div>
 
@@ -29,9 +30,9 @@
   
       
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Launch demo modal
-  </button>
+  </button> -->
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

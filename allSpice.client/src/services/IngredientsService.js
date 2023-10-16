@@ -7,6 +7,7 @@ import { api } from "./AxiosService"
 
 class IngredientsService{
     async createIngredient(ingredientData){
+        ingredientData.recipeId = AppState.activeRecipe.id
         const res = await api.post('api/ingredients', ingredientData)
         logger.log('created ingredient', res.data)
         const newIngredient = new Ingredient(res.data)

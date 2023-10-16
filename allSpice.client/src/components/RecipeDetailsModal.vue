@@ -27,10 +27,11 @@
                         </div>
                     </div>
                     
-                    <div v-for="i in ingredients" :key="i.id" class="col-6">
-                        <IngredientCard :ingredient="i"/>
+                    <div v-for="i in activeRecipeIngredients" :key="i.id" class="col-6">
+                        <!-- //FIXME - make form on this page, loop only the <p> in ingredient card...make it so each ingredient doesn't create a new ingredient card -->
+                        <IngredientCard :activeRecipeIngredient="i"/>                    
                     </div>
-            </div>
+                </div>
             </div>
         </div>
     </section>
@@ -44,20 +45,22 @@ import Pop from '../utils/Pop';
 import { recipesService } from '../services/RecipesService';
 
 import { logger } from '../utils/Logger';
-import IngredientCard from '../components/IngredientCard.vue'
+
+
+
 export default {
     setup(){
         const activeRecipe = computed(()=> AppState.activeRecipe)
-
+        const activeRecipeIngredients = computed(() => AppState.activeRecipeIngredients)
         watchEffect(()=> {
             AppState.activeRecipe
             getIngredientsByRecipe()
         });
         async function getIngredientsByRecipe(){
             try {
-                
+                if(activeRecipe.value.id > 0)
                 await recipesService.getIngredientsByRecipe(activeRecipe.value.id);
-                logger.log('getting ingredients by recipeId', AppState.activeRecipe)
+                logger.log('getting ingredients by recipeId', activeRecipe.value.id)
             } catch (error) {
                 Pop.error(error)
             }
@@ -66,10 +69,11 @@ export default {
 
         return {  
             activeRecipe,
+            activeRecipeIngredients: computed(() => AppState.activeRecipeIngredients),
             ingredients: computed(() => AppState.ingredients),
         }
     },
-    components: { IngredientCard }
+
 };
 </script>
 
