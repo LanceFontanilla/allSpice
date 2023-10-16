@@ -49,6 +49,8 @@ export default {
     }
     return {
       filterBy,
+      account: computed(() => AppState.account),
+      
       recipes: computed(() => AppState.recipes),
       //   if(!filterBy.value){
       //     return AppState.recipes
