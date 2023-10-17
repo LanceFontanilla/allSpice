@@ -68,7 +68,9 @@ export default {
         }
 
 
+
         return {  
+          
             activeRecipe,
             activeRecipeIngredients,
             

@@ -10,7 +10,9 @@
 
       <ModalWrapper id="create-recipe" v-if="user.isAuthenticated">
         <template #button>
-          <i class="mdi mdi-plus-box"></i> Create Recipe
+          <div class="bg-secondary rounded p-2">
+            <i class="mdi mdi-plus-box text-dark">Create Recipe</i> 
+          </div>
         </template>
 
         <template #body>

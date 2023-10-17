@@ -19,7 +19,7 @@
                 <IngredientForm/>          
                 </p>
             </div> 
-           
+        
         </div>
     
 
@@ -47,10 +47,8 @@ export default {
         
         watchEffect(() => {
             AppState.activeRecipeIngredients
-            editable.value = AppState.activeRecipeIngredients
         })
         return {
-            editable,
             accountId: computed(() => AppState.account.id),
             activeRecipeIngredients: computed(() => AppState.activeRecipeIngredients),
             activeRecipe: computed(() => AppState.activeRecipe),

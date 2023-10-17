@@ -28,6 +28,12 @@ class RecipesService{
         logger.log('this is the Ingredient', res.data)
     }
 
+    async deleteRecipe(activeRecipeId){
+        const res = await api.delete(`api/recipes/${activeRecipeId}`)
+        logger.log('removed recipe', res.data)
+        let indexToRemove = AppState.recipes.findIndex(recipe => recipe.id == activeRecipeId)
+        AppState.recipes.splice(indexToRemove, 1)
+    }
 }
 
 export const recipesService = new RecipesService()

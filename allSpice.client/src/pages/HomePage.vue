@@ -46,8 +46,9 @@
         <RecipeDetailsModal/>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          
+          <button title="Delete Recipe" @click.stop="deleteRecipe(activeRecipeId)" v-if="activeRecipe.creatorId == accountId" class="btn bg-dark me-3">
+          <i class="mdi mdi-delete-forever text-light fs-4 "></i></button>
         </div>
       </div>
     </div>
@@ -65,6 +66,9 @@ import { computed, onMounted, ref } from 'vue';
 import Pop from '../utils/Pop';
 import {recipesService} from '../services/RecipesService.js'
 import {AppState} from '../AppState.js'
+import { logger } from '../utils/Logger';
+import { Modal } from 'bootstrap';
+
 
 export default {
   setup() {
@@ -79,17 +83,38 @@ export default {
         Pop.error(error)
       }
     }
+      async function deleteRecipe(activeRecipeId) {
+      try {
+        logger.log('this is the activeRecipeId', activeRecipeId)
+        if (await Pop.confirm('Are you sure you want to delete this Recipe?')) {
+          Modal.getOrCreateInstance('#exampleModal').hide()
+          await recipesService.deleteRecipe(activeRecipeId)
+        }
+      } catch (error) {
+        Pop.error(error)
+      }
+    }
     return {
+      deleteRecipe,
+       activeRecipe: computed(() => AppState.activeRecipe),     
+      accountId: computed(() => AppState.account.id),
+      activeRecipeId: computed(() => AppState.activeRecipe.id),
       filterBy,
       account: computed(() => AppState.account),
       
-      recipes: computed(() => AppState.recipes),
-      //   if(!filterBy.value){
-      //     return AppState.recipes
-      //    }else{
-      //     return AppState.recipes.filter(recipe => recipe.type == filterBy.value)
-      //    }
-      // }),
+      recipes: computed(() => {
+        if (filterBy.value == 'myRecipes' && AppState.account) {
+          logger.log(filterBy.value)
+          logger.log(AppState.account)
+          return AppState.recipes.filter(r => r.creatorId == AppState.account.id)
+        } else if (filterBy.value == 'favorites' && AppState.account) {
+          logger.log(filterBy.value)
+          return AppState.favoriteRecipes
+        } else {
+          logger.log(filterBy.value)
+          return AppState.recipes
+        }
+      })
     
     }
   }
