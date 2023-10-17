@@ -5,19 +5,13 @@
             <div class="card-header bg-dark text-center">
                 <span class="header ">Ingredients</span>
             </div>                 
-            <div class="card-body row">
+            <div class="card-body ">
                 <template v-for="ingredient in activeRecipeIngredients" :key="ingredient.id">
-                <div class="col-6">
-                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> {{ ingredient.quantity }} </p>
-                </div>
-                <div class="col-6">
-                    <p class="p-1 m-0 d-flex align-items-center "> {{ ingredient.name }}  </p>
+                <div class="col-12">
+                    <span class="fs-5"> {{ ingredient.quantity }} </span> <span class="fs-5 ms-1"> {{ ingredient.name }} </span>
                 </div>
                 </template>
-                    
-
-
-        </div>  
+            </div>  
 
             <div class="card-footer bg-dark">
                 <p class="p-0 m-0 d-flex align-items-center ">

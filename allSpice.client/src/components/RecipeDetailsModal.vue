@@ -23,7 +23,7 @@
                                     Instructions
                                 </span>
                             </div>
-                        <p class="card-body bg-secondary text-light mb-0">{{ activeRecipe.instructions }}</p>
+                        <p class="card-body bg-secondary text-light mb-0 fs-4">{{ activeRecipe.instructions }}</p>
                         </div>
                     </div>
                     
