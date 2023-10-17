@@ -10,8 +10,12 @@
                     <div class="col-12 d-flex align-items-center p-4 pt-0">
                         <span class="title">{{ activeRecipe.title }}</span>
                     </div>            
-                    <div class="col-12 d-flex align-items-center p-4 pt-0">
+                    <div class="col-6 d-flex align-items-center p-4 pt-0">
                         <span class="category px-3">{{ activeRecipe.category }}</span>
+                    </div>
+                    <div class="col-6 fs-3" >
+                        <span role="button" @click="createFavorite" class="mdi mdi-heart-multiple"></span>
+                        <span class="mdi mdi-heart-multiple-outline"></span>
                     </div>
                 </div>
                 <div class="row">
@@ -43,9 +47,8 @@ import { AppState } from '../AppState';
 import { computed, reactive, onMounted, watchEffect } from 'vue';
 import Pop from '../utils/Pop';
 import { recipesService } from '../services/RecipesService';
-
+import { favoritesService } from '../services/FavoritesService'
 import { logger } from '../utils/Logger';
-
 
 
 export default {
@@ -54,7 +57,7 @@ export default {
         const activeRecipeIngredients = computed(() => AppState.activeRecipeIngredients)
         watchEffect(()=> {
             AppState.activeRecipe
-        
+            createFavorite()
             getIngredientsByRecipe()
         });
         async function getIngredientsByRecipe(){
@@ -67,10 +70,17 @@ export default {
             }
         }
 
+        async function createFavorite(){
+            try {
+                await favoritesService.createFavorite()
+            } catch (error) {
+                Pop.error(error)
+            }
+        }
 
 
         return {  
-          
+            
             activeRecipe,
             activeRecipeIngredients,
             

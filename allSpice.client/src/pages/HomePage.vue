@@ -10,7 +10,7 @@
 
     <section class="row bg-light-purple gap-5 p-2 rounded my-2">
 
-      <button class="btn col btn-outline-light" @click="filterBy = ''">All</button>
+      <button class="btn col btn-outline-light" @click="filterBy = 'all'">All</button>
       <button class="btn col btn-outline-light" @click="filterBy = 'favorites'">Favorites</button>
       <button class="btn col btn-outline-light" @click="filterBy = 'myRecipes'">My Recipes</button>
 
@@ -39,7 +39,7 @@
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel"></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -105,7 +105,6 @@ export default {
       recipes: computed(() => {
         if (filterBy.value == 'myRecipes' && AppState.account) {
           logger.log(filterBy.value)
-          logger.log(AppState.account)
           return AppState.recipes.filter(r => r.creatorId == AppState.account.id)
         } else if (filterBy.value == 'favorites' && AppState.account) {
           logger.log(filterBy.value)

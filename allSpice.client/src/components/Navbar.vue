@@ -20,6 +20,10 @@
         </template>
       </ModalWrapper>
 
+      <div>
+      <SearchBar/>
+      </div>
+
       <div class="text-end">
       <Login />
     </div>

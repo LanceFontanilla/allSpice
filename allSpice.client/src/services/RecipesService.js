@@ -34,6 +34,20 @@ class RecipesService{
         let indexToRemove = AppState.recipes.findIndex(recipe => recipe.id == activeRecipeId)
         AppState.recipes.splice(indexToRemove, 1)
     }
+
+    async searchRecipes(searchTerm){
+        const res = await api.get(`api/recipes?query=${searchTerm}`)
+        logger.log('recipes query', res.data)
+        AppState.recipes = res.data.recipes.map(recipe => new Recipe(recipe))
+        AppState.searchTerm = searchTerm
+    }
+    async clearSearch() {
+        AppState.searchTerm = ''
+        await recipesService.getRecipes()
+    }
+    as
 }
+
+
 
 export const recipesService = new RecipesService()
