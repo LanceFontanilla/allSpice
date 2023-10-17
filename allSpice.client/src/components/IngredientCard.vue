@@ -6,14 +6,17 @@
                 <span class="header ">Ingredients</span>
             </div>                 
             <div class="card-body row">
+                <template v-for="ingredient in activeRecipeIngredients" :key="ingredient.id">
                 <div class="col-6">
-                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> {{ activeRecipeIngredient.quantity }} </p>
+                    <p class="p-1 m-0 d-flex align-items-center justify-content-center "> {{ ingredient.quantity }} </p>
                 </div>
                 <div class="col-6">
-                    <p class="p-1 m-0 d-flex align-items-center "> {{ activeRecipeIngredient.name }}  </p>
+                    <p class="p-1 m-0 d-flex align-items-center "> {{ ingredient.name }}  </p>
+                </div>
+                </template>
                     
 
-            </div>
+
         </div>  
 
             <div class="card-footer bg-dark">
@@ -41,8 +44,9 @@ export default {
     props: {activeRecipeIngredient: {type: Ingredient, required: true}},
     setup() {
         return {
+            activeRecipeIngredients: computed(() => AppState.activeRecipeIngredients),
             activeRecipe: computed(() => AppState.activeRecipe),
-            
+      
             
         }
     },

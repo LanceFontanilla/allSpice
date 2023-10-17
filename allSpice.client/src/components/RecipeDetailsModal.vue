@@ -7,10 +7,10 @@
             
             <div class="col-8">
                 <div class="row">
-                    <div class="col-6 d-flex align-items-center p-4 pt-0">
+                    <div class="col-12 d-flex align-items-center p-4 pt-0">
                         <span class="title">{{ activeRecipe.title }}</span>
                     </div>            
-                    <div class="col-6 d-flex align-items-center justify-content-end p-4 pt-0">
+                    <div class="col-12 d-flex align-items-center p-4 pt-0">
                         <span class="category px-3">{{ activeRecipe.category }}</span>
                     </div>
                 </div>
@@ -27,10 +27,10 @@
                         </div>
                     </div>
                     
-                    <div v-for="i in activeRecipeIngredients" :key="i.id" class="col-6">
-                        <!-- //FIXME - make form on this page, loop only the <p> in ingredient card...make it so each ingredient doesn't create a new ingredient card -->
-                        <IngredientCard :activeRecipeIngredient="i"/>                    
+                    <div class="col-6">
+                        <IngredientCard/>                    
                     </div>
+
                 </div>
             </div>
         </div>
@@ -51,10 +51,10 @@ import { logger } from '../utils/Logger';
 export default {
     setup(){
         const activeRecipe = computed(()=> AppState.activeRecipe)
-        
+        const activeRecipeIngredients = computed(() => AppState.activeRecipeIngredients)
         watchEffect(()=> {
             AppState.activeRecipe
-           
+        
             getIngredientsByRecipe()
         });
         async function getIngredientsByRecipe(){
@@ -70,7 +70,7 @@ export default {
 
         return {  
             activeRecipe,
-            activeRecipeIngredients: computed(() => AppState.activeRecipeIngredients),
+            activeRecipeIngredients,
             
         }
     },
