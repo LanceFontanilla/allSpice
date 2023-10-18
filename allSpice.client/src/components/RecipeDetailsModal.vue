@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-6 fs-3" >
                         <span role="button" @click="createFavorite(activeRecipeId)" class="mdi mdi-heart-multiple"></span>
-                        <span class="mdi mdi-heart-multiple-outline"></span>
+                        <span role="button" @click="deleteFavorite(activeRecipeId)" class="mdi mdi-heart-multiple-outline"></span>
                     </div>
                 </div>
                 <div class="row">
@@ -99,8 +99,17 @@ export default {
             } catch (error) {
                 Pop.error(error)
             }
-        }
-
+        },
+            async deleteFavorite(activeRecipeId){
+            try {
+                let favoriteData = { recipeId: activeRecipeId}
+                logger.log('this is the favorite recipe id to delete', activeRecipeId)
+                await favoritesService.deleteFavorite(favoriteData)
+            } catch (error) {
+                    Pop.error(error)
+            }
+        
+        },
         }
     },
 

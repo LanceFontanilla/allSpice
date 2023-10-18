@@ -58,8 +58,8 @@ export default {
             async deleteIngredient(ingredientId){
                 try {
                     if(await Pop.confirm('Are you sure you want to delete this Ingredient?')){
-                        logger.log('this is the ingredient', ingredientId)
                         await ingredientsService.deleteIngredient(ingredientId)
+                        logger.log('this is the ingredient', ingredientId)
                         Pop.toast('You have deleted this ingredient', 'success', 'center' )
                     }
                 } catch (error) {

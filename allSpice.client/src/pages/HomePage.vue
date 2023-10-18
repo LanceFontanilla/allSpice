@@ -76,7 +76,7 @@ export default {
       getRecipes();
     });
     watchEffect(()=>{
-      AppState.activeRecipes
+      AppState.filterRecipes
     });
     const filterBy = ref('')
     async function getRecipes(){
@@ -99,7 +99,7 @@ export default {
     }
     return {
       deleteRecipe,
-  
+      filterRecipes: computed(() => AppState.filterRecipes),
       activeRecipe: computed(() => AppState.activeRecipe),     
       accountId: computed(() => AppState.account.id),
       activeRecipeId: computed(() => AppState.activeRecipe.id),
