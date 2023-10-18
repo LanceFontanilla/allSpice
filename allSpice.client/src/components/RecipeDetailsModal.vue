@@ -14,7 +14,7 @@
                         <span class="category px-3">{{ activeRecipe.category }}</span>
                     </div>
                     <div class="col-6 fs-3" >
-                        <span role="button" @click="createFavorite" class="mdi mdi-heart-multiple"></span>
+                        <span role="button" @click="createFavorite(activeRecipeId)" class="mdi mdi-heart-multiple"></span>
                         <span class="mdi mdi-heart-multiple-outline"></span>
                     </div>
                 </div>
@@ -50,14 +50,22 @@ import { recipesService } from '../services/RecipesService';
 import { favoritesService } from '../services/FavoritesService'
 import { logger } from '../utils/Logger';
 
+import { Recipe } from '../models/Recipe';
+
+
+
 
 export default {
-    setup(){
+    props: {
+        recipeProp: {type: Recipe, required: true}
+    },
+    setup(props){
+
         const activeRecipe = computed(()=> AppState.activeRecipe)
         const activeRecipeIngredients = computed(() => AppState.activeRecipeIngredients)
         watchEffect(()=> {
             AppState.activeRecipe
-            createFavorite()
+
             getIngredientsByRecipe()
         });
         async function getIngredientsByRecipe(){
@@ -70,20 +78,29 @@ export default {
             }
         }
 
-        async function createFavorite(){
+
+
+        return { 
+            account: computed(() => AppState.account), 
+            activeRecipeId: computed(() => AppState.activeRecipe.id),            
+            activeRecipe,
+            activeRecipeIngredients,
+            favorites: computed(() => AppState.favorites),
+            isFavorite: computed(() => {
+                let foundFavorite = AppState.favorites?.find(f => f.id == props.recipeProp.id)
+                return foundFavorite;
+            }),
+
+            async createFavorite(activeRecipeId){
             try {
-                await favoritesService.createFavorite()
+                let favoriteData = { recipeId: activeRecipeId }
+                logger.log('this is the favorite recipe id', activeRecipeId)
+                await favoritesService.createFavorite(favoriteData)
             } catch (error) {
                 Pop.error(error)
             }
         }
 
-
-        return {  
-            
-            activeRecipe,
-            activeRecipeIngredients,
-            
         }
     },
 

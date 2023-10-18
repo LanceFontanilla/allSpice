@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watchEffect } from 'vue';
 import Pop from '../utils/Pop';
 import {recipesService} from '../services/RecipesService.js'
 import {AppState} from '../AppState.js'
@@ -74,6 +74,9 @@ export default {
   setup() {
     onMounted(()=> {
       getRecipes();
+    });
+    watchEffect(()=>{
+      AppState.activeRecipes
     });
     const filterBy = ref('')
     async function getRecipes(){
@@ -96,7 +99,8 @@ export default {
     }
     return {
       deleteRecipe,
-       activeRecipe: computed(() => AppState.activeRecipe),     
+  
+      activeRecipe: computed(() => AppState.activeRecipe),     
       accountId: computed(() => AppState.account.id),
       activeRecipeId: computed(() => AppState.activeRecipe.id),
       filterBy,

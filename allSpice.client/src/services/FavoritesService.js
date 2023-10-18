@@ -1,11 +1,15 @@
 import { AppState } from "../AppState"
 import { Favorite } from "../models/Favorite"
+import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
 
 class FavoritesService{
-    async createFavorite(activeRecipeId){
-        await api.post(`api/favorites`, {activeRecipeId: activeRecipeId})
+    async createFavorite(recipeId){
+        logger.log('this is the recipeId', recipeId)
+        await api.post('api/favorites', recipeId)
+        logger.log('created Favorite')
+        
         this.getFavorites()
     }
     async getFavorites() {

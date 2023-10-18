@@ -35,17 +35,17 @@ class RecipesService{
         AppState.recipes.splice(indexToRemove, 1)
     }
 
-    async searchRecipes(searchTerm){
-        const res = await api.get(`api/recipes?query=${searchTerm}`)
-        logger.log('recipes query', res.data)
-        AppState.recipes = res.data.recipes.map(recipe => new Recipe(recipe))
-        AppState.searchTerm = searchTerm
+    searchRecipes(searchTerm){
+        logger.log('this is the search term', searchTerm)
+        AppState.filterRecipes = AppState.recipes.filter(recipe => recipe.category == searchTerm.search)
+        logger.log(AppState.filterRecipes, 'this is the recipes after filter')
+        AppState.recipes = AppState.filterRecipes
     }
     async clearSearch() {
         AppState.searchTerm = ''
         await recipesService.getRecipes()
     }
-    as
+    
 }
 
 
